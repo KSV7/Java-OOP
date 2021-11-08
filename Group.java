@@ -3,7 +3,7 @@ package com.gmail.kutepov89.sergey;
 import java.util.Arrays;
 
 public class Group {
-	Student[] students = new Student[10];
+	private Student[] students = new Student[10];
 
 	public Group(Student[] students) {
 		super();
@@ -34,7 +34,7 @@ public class Group {
 
 	public String del(String lastName) {
 		for (int i = 0; i < students.length; i++) {
-			if (students[i] != null && students[i].getLastName() == lastName) {
+			if (students[i] != null && students[i].getLastName().equalsIgnoreCase(lastName)) {
 				students[i] = null;
 				return "студент " + lastName + " удален";
 			}
@@ -44,7 +44,7 @@ public class Group {
 
 	public Student searchByLastName(String lastName) {
 		for (int i = 0; i < students.length; i++) {
-			if (students[i] != null && students[i].getLastName() == lastName) {
+			if (students[i] != null && students[i].getLastName().equalsIgnoreCase(lastName)) {
 				return students[i];
 			}
 		}
