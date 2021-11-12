@@ -8,6 +8,10 @@ public class Student extends Human {
 		this.id = id;
 	}
 
+	public Student(String firstName, String lastName, String patronymic, int age) {
+		super(firstName, lastName, patronymic, age);
+	}
+	
 	public Student() {
 		super();
 	}

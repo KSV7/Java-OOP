@@ -1,13 +1,21 @@
 package com.gmail.kutepov89.sergey;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Group {
-	Student[] students = new Student[10];
+	private String name;
+	private Student[] students = new Student[10];
 
-	public Group(Student[] students) {
+	public Group(String name, Student[] students) {
 		super();
+		this.name = name;
 		this.students = students;
+	}
+	
+	public Group(String name) {
+		super();
+		this.name = name;
 	}
 
 	public Group() {
@@ -34,7 +42,7 @@ public class Group {
 
 	public String del(String lastName) {
 		for (int i = 0; i < students.length; i++) {
-			if (students[i] != null && students[i].getLastName() == lastName) {
+			if (students[i] != null && students[i].getLastName().equalsIgnoreCase(lastName)) {
 				students[i] = null;
 				return "студент " + lastName + " удален";
 			}
@@ -44,36 +52,25 @@ public class Group {
 
 	public Student searchByLastName(String lastName) {
 		for (int i = 0; i < students.length; i++) {
-			if (students[i] != null && students[i].getLastName() == lastName) {
+			if (students[i] != null && students[i].getLastName().equalsIgnoreCase(lastName)) {
 				return students[i];
 			}
 		}
 		return null;
 	}
 
-	public void sortByLastName(Student[] students) {
-		Student temp;
-		for (int i = 0; i < students.length; i++) {
-			if (students[i] != null) {
-				for (int j = 0; j < students.length - 1; j++) {
-					if (students[j] != null && students[j + 1] != null) {
-						if (students[j].getLastName().compareToIgnoreCase(students[j + 1].getLastName()) > 0) {
-							temp = students[j];
-							students[j] = students[j + 1];
-							students[j + 1] = temp;
-						}
-					}
-				}
-			}
-		}
+	public void sortStudentsByLastName(Student[] students) {
+		Arrays.sort(students, Comparator.nullsFirst(new StudentLastNameComparator()));
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		sortByLastName(students);
+		sortStudentsByLastName(students);
 
+		stringBuilder.append("\n");
+		stringBuilder.append("Group name: "+ name);
 		stringBuilder.append("\n");
 		for (Student s : students) {
 			if (s != null) {

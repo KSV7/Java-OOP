@@ -16,6 +16,14 @@ public class Human {
 		this.gender = gender;
 	}
 	
+	public Human(String firstName, String lastName, String patronymic, int age) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.patronymic = patronymic;
+		this.age = age;
+	}
+	
 	public Human() {
 		super();
 	}
