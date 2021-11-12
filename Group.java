@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Group {
+<<<<<<< HEAD
 	private String name;
+=======
+>>>>>>> c97d3f1d4d71740ea9f741e4e6eb3fbb7595b162
 	private Student[] students = new Student[10];
 
 	public Group(String name, Student[] students) {
