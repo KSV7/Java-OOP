@@ -22,7 +22,7 @@ public class Main {
 //
 //		Student st11 = new Student("Vlad", "Lewis", "Vladimirovich", 21, true, 11);
 //
-//		Group group = new Group("First group");
+		Group group = new Group("First group");
 //
 //		group.add(st);
 //		group.add(st2);
@@ -45,12 +45,16 @@ public class Main {
 //
 //		System.out.println("Сортировка студентов с помощью Comparator:");
 //		System.out.println(group);
-
-		Group group2 = new Group("Second group");
-
-		StudentFactory.addStudent(group2);
 		
-		System.out.println(group2);
+//		group.saveListStudentsToFile("students.txt");
+		group.readListStudentsFromFile("students.txt", group);
+		System.out.println(group);
+
+//		Group group2 = new Group("Second group");
+//
+//		StudentFactory.addStudent(group2);
+//		
+//		System.out.println(group2);
 		
 //		System.out.println(group2.searchByLastName("Gibson"));
 

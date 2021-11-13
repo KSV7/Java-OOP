@@ -1,13 +1,15 @@
 package com.gmail.kutepov89.sergey;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class Group {
-<<<<<<< HEAD
 	private String name;
-=======
->>>>>>> c97d3f1d4d71740ea9f741e4e6eb3fbb7595b162
 	private Student[] students = new Student[10];
 
 	public Group(String name, Student[] students) {
@@ -15,7 +17,7 @@ public class Group {
 		this.name = name;
 		this.students = students;
 	}
-	
+
 	public Group(String name) {
 		super();
 		this.name = name;
@@ -66,6 +68,42 @@ public class Group {
 		Arrays.sort(students, Comparator.nullsFirst(new StudentLastNameComparator()));
 	}
 
+	public void saveListStudentsToFile(String fileName) {
+		String res = "";
+		StringBuilder stringBuilder = new StringBuilder();
+		sortStudentsByLastName(students);
+
+		for (Student s : students) {
+			if (s != null) {
+				stringBuilder
+						.append(s.getLastName() + " " + s.getFirstName() + " " + s.getPatronymic() + " " + s.getAge())
+						.append("\n");
+			}
+		}
+		res = stringBuilder.toString();
+
+		try (PrintWriter a = new PrintWriter(fileName)) {
+			a.println(res);
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR FILE WRITE");
+		}
+	}
+
+	public void readListStudentsFromFile(String fileName, Group group) {
+		try (BufferedReader f = new BufferedReader(new FileReader(fileName))) {
+			String str = "";
+			for (; (str = f.readLine()) != null;) {
+				if (!str.isEmpty()) {
+					String[] student = str.split(" ");
+					Student st = new Student(student[0], student[1], student[2], Integer.parseInt(student[3]), true, 1);
+					group.add(st);
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("ERROR");
+		}
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -73,7 +111,7 @@ public class Group {
 		sortStudentsByLastName(students);
 
 		stringBuilder.append("\n");
-		stringBuilder.append("Group name: "+ name);
+		stringBuilder.append("Group name: " + name);
 		stringBuilder.append("\n");
 		for (Student s : students) {
 			if (s != null) {
